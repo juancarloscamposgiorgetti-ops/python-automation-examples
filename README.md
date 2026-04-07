@@ -1,3 +1,60 @@
+# Sincronizador de Catálogos Ecommerce (UNION)
+
+Script en Python que sincroniza catálogos de productos de dos fuentes de ecommerce distintas mediante una operación UNION.
+
+## Cómo funciona
+
+1. Se cargan dos archivos Excel con catálogos de productos (fuente A y fuente B).
+2. Se realiza un UNION de ambos catálogos (todos los productos de ambas fuentes).
+3. Cuando un SKU aparece en ambas fuentes, se resuelve el conflicto conservando el registro con mayor precio.
+4. El catálogo unificado se exporta a un nuevo archivo Excel.
+
+## Tecnologías
+
+- Python
+- Pandas
+- OpenPyXL
+
+## Estructura de los archivos Excel
+
+Cada archivo Excel de entrada debe contener la columna `SKU` (clave primaria) y puede incluir:
+
+| Columna | Descripción |
+|---|---|
+| SKU | Identificador único del producto |
+| NOMBRE | Nombre del producto |
+| CATEGORIA | Categoría principal |
+| SUBCATEGORIA | Subcategoría |
+| PRECIO | Precio de venta |
+| STOCK | Unidades disponibles |
+| FABRICANTE | Marca o fabricante |
+| DESCRIPCION | Descripción del producto |
+| ACTIVO | Si el producto está activo (True/False) |
+
+## Uso
+
+```python
+from ecommerce_sync import sincronizar
+
+sincronizar(
+    ruta_fuente_a="catalogo_fuente_a.xlsx",
+    ruta_fuente_b="catalogo_fuente_b.xlsx",
+    ruta_salida="catalogo_sincronizado.xlsx",
+)
+```
+
+O ejecutar directamente:
+
+```bash
+python ecommerce_sync.py
+```
+
+## Resultado
+
+Se genera un archivo Excel con el catálogo unificado, sin duplicados, con los conflictos resueltos por precio.
+
+---
+
 # Generador automático de firmas de correo
 
 Script en Python que genera firmas de correo corporativas automáticamente.
